@@ -1,0 +1,96 @@
+CyberSentinel v3 — EXE Build Guide
+====================================
+
+QUICK START (recommended)
+--------------------------
+1. Open the cybersentinel_v3 folder
+2. Double-click  BUILD_EXE.bat
+3. Wait 2-5 minutes
+4. Your EXE appears in the  dist\  folder
+
+
+MANUAL BUILD COMMANDS
+---------------------
+If the .bat file doesn't work, open Command Prompt in the project folder and run:
+
+  pip install pyinstaller pillow reportlab
+  pyinstaller CyberSentinel_v3.spec
+
+Or the single command version:
+
+  pyinstaller --onefile --windowed --name CyberSentinel_v3 --add-data "modules;modules" main.py
+
+
+COMMON ERRORS & FIXES
+----------------------
+
+ERROR: "Python not found" or "'python' is not recognized"
+  FIX: Install Python from https://python.org
+       During install, CHECK the box "Add Python to PATH"
+       Then restart Command Prompt and try again.
+
+ERROR: "No module named 'tkinter'"
+  FIX: Reinstall Python from python.org
+       Make sure to select "tcl/tk and IDLE" during custom install.
+       tkinter ships with Python on Windows — if missing, reinstall.
+
+ERROR: "No module named 'PIL'" or "No module named 'reportlab'"
+  FIX: Run:  pip install pillow reportlab
+       Then rebuild.
+
+ERROR: Antivirus blocks or quarantines the EXE
+  FIX: This is NORMAL with PyInstaller-built EXEs.
+       Add the dist\ folder to your antivirus exclusions.
+       Or temporarily disable real-time protection during build.
+
+ERROR: EXE opens then immediately closes
+  FIX: Build with console temporarily to see error:
+       pyinstaller --onefile --name CyberSentinel_v3 --add-data "modules;modules" main.py
+       (Remove --windowed so the console stays open)
+       Read the error message, fix it, then add --windowed back.
+
+ERROR: "Failed to execute script main" 
+  FIX: The modules folder is missing from the EXE.
+       Make sure you run the build from inside the cybersentinel_v3 folder.
+       Check that the modules\ folder is present before building.
+
+ERROR: "UPX is not available"
+  FIX: This is a warning, not an error. The EXE will still be built.
+       UPX just compresses it smaller. Safe to ignore.
+
+ERROR: Build takes very long (>15 minutes)
+  FIX: Normal on first build. Antivirus scanning slows it down.
+       Add the project folder to antivirus exclusions.
+
+
+FILE SIZE
+---------
+The resulting EXE will be 30-60 MB. This is NORMAL for Python EXEs because
+PyInstaller bundles Python itself + all libraries into one file.
+
+
+SHARING THE EXE
+---------------
+The dist\CyberSentinel_v3.exe file is STANDALONE.
+- Copy it to any Windows PC
+- Double-click to run
+- No Python installation needed on the target machine
+- The hash_records.db database will be created next to the EXE on first run
+
+
+ADDING AN ICON
+--------------
+To give the EXE a custom icon:
+1. Get or create a .ico file (use https://convertio.co to convert PNG to ICO)
+2. Name it  cybersentinel.ico
+3. Place it in the cybersentinel_v3 folder
+4. In CyberSentinel_v3.spec, uncomment the line:
+       icon='cybersentinel.ico',
+5. Rebuild
+
+
+PYTHON VERSION NOTES
+--------------------
+Tested with Python 3.9 - 3.12.
+Python 3.14 (newest) may have compatibility issues with some libraries.
+If you get errors, try installing Python 3.11 from python.org alongside your current version.

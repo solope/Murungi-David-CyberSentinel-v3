@@ -1,0 +1,10 @@
+# CyberSentinel v3 — Python Dependencies
+# ─────────────────────────────────────────────────────────────────────
+# tkinter ships with Python on Windows and macOS.
+# On Ubuntu/Debian:  sudo apt install python3-tk
+#
+# Required for PDF report generation (Hash Verifier → Generate PDF):
+reportlab>=3.6.0
+#
+# Optional — for full EXIF metadata from images:
+Pillow>=9.0.0
